@@ -1,0 +1,129 @@
+package javabankingproject2;
+import java.util.Scanner;
+
+class BankAccount {
+     String accountHolderName;
+     String bankName;
+     String accountnumber;
+     String IFSCcode;
+     String atmpassword;
+     String accountHolderconactnumber;
+     double balance;
+
+public BankAccount(String accountHolderName,String bankName,String accountnumber,String IFSCcode,String atmpassword,String accountHolderconactnumber) {
+        this.accountHolderName = accountHolderName;
+        this.bankName = bankName;
+        this.accountnumber=accountnumber;
+        this.IFSCcode=IFSCcode;
+        this.atmpassword=atmpassword;
+        this.accountHolderconactnumber=accountHolderconactnumber;
+        this.balance = 0;
+    } 
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+    public String accountnumber(){
+        return accountnumber;
+    }
+    public String IFSCcode(){
+        return IFSCcode;
+    }
+    public String atmpassword(){
+        return atmpassword;
+    }
+    public String accountHolderconactnumber(){
+        return accountHolderconactnumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited: $" + amount);
+        }
+        else {
+            System.out.println("Invalid amount. Please enter a positive value.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            balance -= amount;
+            System.out.println("Withdrawn: $" + amount);
+        } 
+        else {
+            System.out.println("Invalid amount or insufficient funds.");
+        }
+    }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: $" + balance);
+    }
+}
+
+public class BankingApplication {
+    public static void main(String[] args) {
+         Scanner scanner = new Scanner(System.in) ;
+            System.out.println("Welcome to the sbi bank what i should help you: ");
+           
+            System.out.print("Enter the bank name: ");
+            String bankName = scanner.nextLine();
+            System.out.print("Enter the account holder's name: ");
+            String accountHolderName = scanner.nextLine();
+            System.out.println("enter the account number: ");
+            String accountnumber = scanner.nextLine();
+            System.out.println("enter a IFSC code: ");
+            String IFSCcode=scanner.nextLine();
+            System.out.println("enter a atm password:");
+            String  atmpassword=scanner.nextLine();
+            System.out.println("enter a accountHolderconactnumber: ");
+            String accountHolderconactnumber=scanner.nextLine();
+            
+            
+            BankAccount account = new BankAccount(accountHolderName, bankName,accountnumber,IFSCcode,atmpassword,accountHolderconactnumber);
+            
+            boolean exit = false;
+            while (!exit) {
+                System.out.println("\nBanking Menu:");
+                System.out.println("\n accoutbumber:");
+                System.out.println("1. Deposit");
+                System.out.println("2. Withdraw");
+                System.out.println("3. Check Balance");
+                System.out.println("4. Exit");
+                System.out.print("Choose an option: ");
+                int choice = scanner.nextInt();
+                
+                switch (choice) {
+                    case 1:
+                        System.out.print("Enter amount to deposit: ");
+                        double depositAmount = scanner.nextDouble();
+                        account.deposit(depositAmount);
+                        break;
+                    case 2:
+                        System.out.print("Enter amount to withdraw: ");
+                        double withdrawAmount = scanner.nextDouble();
+                        account.withdraw(withdrawAmount);
+                        break;
+                    case 3:
+                        account.checkBalance();
+                        break;
+                    case 4:
+                        exit = true;
+                        System.out.println(" Thank you visit again have a great day!");
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            }
+        }
+    }
+
+
